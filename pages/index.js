@@ -41,7 +41,7 @@ export default function Home({ universities }) {
 
           <div className="hero-content-outer">
             <div className="hero-content-inner">
-              <h2>Find the Student House that will become your next <span>Home</span></h2>
+              <h2>Find the Student House that will become your next <span className="text">Home</span></h2>
 
               <div className="hero-content-search-div">
                 <input 
@@ -62,9 +62,9 @@ export default function Home({ universities }) {
                     <div className="hero-search-div">
                       {
                         universities
-                          .filter(name => name.toLowerCase().includes(search.toLowerCase()))
+                          .filter(uni => uni.uni_name.toLowerCase().includes(search.toLowerCase()))
                           .map(uni => {
-                            const { name, slug } = uni
+                            const { uni_name: name, uni_slug: slug } = uni
 
                           return <div key={name} onClick={() => router.push(`/universities/${slug}`)}>{name}</div>
                         })
@@ -82,7 +82,7 @@ export default function Home({ universities }) {
         <div className="text">
           <div>
             <h3>
-              Find the residence that’s best for <span>you</span>
+              Find the residence that’s best for <span className="text">you</span>
             </h3>
             <p>
               Locating the residence that best suits your needs has never been easier. Read our student reviews and testimonials from a variety of South African universities.
@@ -132,7 +132,6 @@ export default function Home({ universities }) {
               return (
                 <div className="uni-card" key={id}>
                   <div className="uni-card-img" onClick={() => {
-                    console.log(slug)
                     router.push(`/universities/${slug}`)
                   }}>
                     <Image
