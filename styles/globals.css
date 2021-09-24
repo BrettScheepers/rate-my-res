@@ -49,6 +49,10 @@ h6 {
 span.text {
   color: var(--green);
 }
+span.click {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 input {
   border: none;
@@ -285,14 +289,14 @@ footer p:first-of-type {
 }
 
 .uni-content > .residences {
-
+  margin-bottom: 2rem;
 }
 .uni-content > .residences h3 {
-  margin-bottom: 3rem;
   margin-top: 1rem;
 }
 
 .residence-card-container {
+  margin: 3rem 0;
   display: flex;
   flex-direction: column;
 }

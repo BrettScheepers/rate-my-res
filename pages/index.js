@@ -130,10 +130,10 @@ export default function Home({ universities }) {
               const { uni_id: id, uni_name: name, uni_slug: slug } = uni
 
               return (
-                <div className="uni-card" key={id}>
-                  <div className="uni-card-img" onClick={() => {
-                    router.push(`/universities/${slug}`)
-                  }}>
+                <div className="uni-card" key={id} onClick={() => {
+                  router.push(`/universities/${slug}`)
+                }}>
+                  <div className="uni-card-img">
                     <Image
                       src={`/assets/uni-images/${id}.jpg`}
                       alt={name}

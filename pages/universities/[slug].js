@@ -7,7 +7,8 @@ import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel'; 
 import FormGroup from '@mui/material/FormGroup'; 
 import Checkbox from '@mui/material/Checkbox'; 
-import Rating from '@mui/material/Rating'; 
+import Rating from '@mui/material/Rating';
+import { makeStyles } from '@mui/styles';
 
 export const getStaticPaths = async () => {
     const res = await pool.query('SELECT * FROM universities')
@@ -35,7 +36,17 @@ export const getStaticProps = async (context) => {
     }
 }
 
+const useStyles = makeStyles({
+    input: {
+        color: "#51ff00",
+        "&.Mui-checked": {
+            color: "#51ff00"
+        }
+    }
+})
+
 const University = ({ university }) => {
+    const classes = useStyles()
     const { uni_id: id, uni_name: name, uni_slug: slug} = university
     const [isChecked, setIsChecked] = useState(true)
 
@@ -63,9 +74,9 @@ const University = ({ university }) => {
                             defaultValue="name"
                             name="sort"
                         >
-                            <FormControlLabel value="name" control={<Radio />} label="Name" />
-                            <FormControlLabel value="highest-rated" control={<Radio />} label="Highest Rated" />
-                            <FormControlLabel value="most-reviews" control={<Radio />} label="Most Reviews" />
+                            <FormControlLabel value="name" control={<Radio className={classes.input} />} label="Name" />
+                            <FormControlLabel value="highest-rated" control={<Radio className={classes.input} />} label="Highest Rated" />
+                            <FormControlLabel value="most-reviews" control={<Radio className={classes.input} />} label="Most Reviews" />
                         </RadioGroup>
                     </div>
                     <div className="spacing">
@@ -75,11 +86,11 @@ const University = ({ university }) => {
                             defaultValue="all"
                             name="class"
                         >
-                            <FormControlLabel value="all" control={<Radio />} label="All Years" />
-                            <FormControlLabel value="first-year" control={<Radio />} label="First Years" />
-                            <FormControlLabel value="second-year" control={<Radio />} label="Second Years" />
-                            <FormControlLabel value="grad" control={<Radio />} label="Third Years/Graduates" />
-                            <FormControlLabel value="post-grad" control={<Radio />} label="Post Graduates" />
+                            <FormControlLabel value="all" control={<Radio className={classes.input} />} label="All Years" />
+                            <FormControlLabel value="first-year" control={<Radio className={classes.input} />} label="First Years" />
+                            <FormControlLabel value="second-year" control={<Radio className={classes.input} />} label="Second Years" />
+                            <FormControlLabel value="grad" control={<Radio className={classes.input} />} label="Third Years/Graduates" />
+                            <FormControlLabel value="post-grad" control={<Radio className={classes.input} />} label="Post Graduates" />
                         </RadioGroup>
                     </div>
                     <div className="spacing">
@@ -88,7 +99,7 @@ const University = ({ university }) => {
                         <FormGroup>
                             <FormControlLabel
                                 label="Label"
-                                control={<Checkbox checked={isChecked} />}
+                                control={<Checkbox className={classes.input} checked={isChecked} />}
                             />
                         </FormGroup>
                     </div>
@@ -170,6 +181,8 @@ const University = ({ university }) => {
                             </div>
                         </div>
                     </div>
+
+                    <h2>Cant find Your Res? <span className="text click">Add it here</span></h2>
                 </div>
             </div>
         </div>
