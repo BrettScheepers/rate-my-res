@@ -216,7 +216,7 @@ const University = ({ university }) => {
                             </div>
                         </div>
 
-                        <h2>Cant find Your Res? <Link as={`/universities/${slugUni}/add-res`} href="/universities/[slugUni]/add-res"><span className="text click">Add it here</span></Link></h2>
+                        <h2>Cant find Your Res? <Link as={`/universities/${slugUni}/add-res`} href="/universities/[slugUni]/add-res" passHref><span className="text click">Add it here</span></Link></h2>
                     </div>
                 </div>
             </div>
