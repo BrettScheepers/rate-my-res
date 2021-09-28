@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.4.0",
     "@emotion/react": "^11.4.1",
+    "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.1",
-    "@mui/material": "^5.0.1",
+    "@mui/icons-material": "^5.0.0-rc.1",
+    "@mui/material": "^5.0.0-rc.1",
     "@mui/styles": "^5.0.1",
+    "create-emotion-server": "^11.0.0",
+    "moment": "^2.29.1",
     "next": "11.1.2",
     "pg": "^8.7.1",
     "react": "17.0.2",

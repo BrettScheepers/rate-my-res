@@ -46,6 +46,13 @@ h6 {
   font-size: 16px;
 }
 
+button {
+  border: none;
+  outline: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 span.text {
   color: var(--green);
 }
@@ -106,6 +113,27 @@ form {
 .icon {
   color: var(--blue);
   font-size: 2rem;
+}
+
+.btn-main {
+  color: var(--white);
+  background-color: var(--green);
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+}
+.btn-main:hover,
+.btn-main:focus {
+  background-color: #00fc00;
+}
+
+.btn-back {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.btn-back p {
+  margin-left: 0.25rem;
 }
 
 .subtitle {
@@ -396,9 +424,14 @@ form {
   box-shadow:  5px 5px 10px #919191,
               -5px -5px 10px #ffffff;
   z-index: 4;
+  cursor: pointer;
 }
 .amenity p {
   margin-right: 1rem;
+}
+
+.amenity-active {
+  background-color: var(--green);
 }
 
 .comment-container {
