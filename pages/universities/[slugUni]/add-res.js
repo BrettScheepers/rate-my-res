@@ -158,7 +158,7 @@ const AddDorm = () => {
             console.log(res.status)
             res.json()
         })
-        .then(data => console.log(data))
+        .then(data => console.log('Completed'))
 
     }
 
