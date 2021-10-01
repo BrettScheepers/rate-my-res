@@ -49,8 +49,9 @@ h6 {
 button {
   border: none;
   outline: none;
-  font-size: 24px;
+  font-size: 16px;
   cursor: pointer;
+  display: block;
 }
 
 span.text {
@@ -59,6 +60,9 @@ span.text {
 span.click {
   cursor: pointer;
   text-decoration: underline;
+}
+span.bold {
+  font-weight: bold;
 }
 
 input {
@@ -118,8 +122,8 @@ form {
 .btn-main {
   color: var(--white);
   background-color: var(--green);
-  padding: 1rem 1.5rem;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 3px;
 }
 .btn-main:hover,
 .btn-main:focus {
@@ -129,7 +133,7 @@ form {
 .btn-disabled {
   padding: 1rem 1.5rem;
   font-size: 14px;
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: rgb(43, 43, 43);
   color: var(--white);
   cursor: not-allowed;
@@ -139,7 +143,7 @@ form {
   background-color: transparent;
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 .btn-back p {
   margin-left: 0.25rem;
@@ -316,6 +320,8 @@ form {
   inset: 0;
 } */
 
+
+
 /* Universities Page */
 .banner {
   width: 100%;
@@ -325,14 +331,14 @@ form {
 
 .uni-content {
   display: grid;
-  grid-template-columns: 1fr 2.5fr;
+  grid-template-columns: 1fr 2fr;
 }
 .uni-content > div {
-  padding: 1.5rem;
+  padding: 2rem;
 }
 
-.uni-content > .filter > .spacing {
-  margin: 2rem 0;
+.spacing {
+  margin: 1.5rem 0;
 }
 
 .uni-content > .residences {
@@ -374,6 +380,8 @@ form {
     font-size: 18px;
   }
 }
+
+
 
 /* Add Dorm Page */
 .add-dorm-page {
@@ -451,6 +459,80 @@ form {
 .comment-container {
   width: 100%;
   margin: 1rem 0;
+}
+
+
+/* Residence Page */
+/* .residence-page {
+  padding: 2rem;
+} */
+
+
+.residence-page > .name {
+  padding: 1.5rem;
+}
+
+.res-banner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'content image';
+}
+
+.res-banner > .content {
+  grid-area: content;
+  padding: 5rem 2rem;
+  color: var(--white);
+  background-color: var(--blue);
+}
+/* .res-banner > .content > h1, */
+.res-banner > .content > button {
+  margin: 1rem 0;
+}
+
+.res-banner > .image {
+  grid-area: image;
+  height: 100%;
+  position: relative;
+}
+
+
+.res-content {
+  height: 1000px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'specs reviews';
+}
+
+.res-specs {
+  grid-area: specs;
+  margin: 2rem;
+}
+
+.rating-spec {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.rating-spec > div {
+  margin-right: 0.75rem;
+}
+
+.res-specs > .spacing > h5 {
+  margin-bottom: 1rem;
+}
+
+.amenity-spec {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.amenity-spec span {
+  margin-left: 0.75rem;
 }
 
 
