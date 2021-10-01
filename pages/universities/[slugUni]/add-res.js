@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import {server} from '../../../config/index'
 import Header from '../../../components/Header'
 import BackButton from '../../../components/BackButton'
 import TextField from '@mui/material/TextField';
@@ -8,7 +9,82 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import moment from 'moment'
-import {amenitiesDefaultArr} from '../../../imports/imports'
+// import {amenitiesDefaultArr} from '../../../imports/imports'
+
+// Icons
+import WcIcon from '@mui/icons-material/Wc'; //Private Bathroom
+import FastfoodIcon from '@mui/icons-material/Fastfood'; //Dining Hall
+import WifiIcon from '@mui/icons-material/Wifi'; //Wifi
+import LocalLaundryServiceIcon from '@mui/icons-material/LocalLaundryService'; //Laundry
+import AcUnitIcon from '@mui/icons-material/AcUnit'; //Air Cond
+import KitchenIcon from '@mui/icons-material/Kitchen'; //Kitchen
+import WeekendIcon from '@mui/icons-material/Weekend'; //Student Area
+import ElevatorIcon from '@mui/icons-material/Elevator'; //Elevator
+import RunCircleIcon from '@mui/icons-material/RunCircle'; //Gym
+import EmailIcon from '@mui/icons-material/Email'; //Mailroom
+
+export const amenitiesDefaultArr = [
+    {
+        data: "bathroom",
+        text: "Private Bathroom",
+        icon: <WcIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "dining",
+        text: "Dining Hall",
+        icon: <FastfoodIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "wifi",
+        text: "Wifi",
+        icon: <WifiIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "laundry",
+        text: "Laundry",
+        icon: <LocalLaundryServiceIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "airconditioning",
+        text: "Air Conditioning",
+        icon: <AcUnitIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "kitchen",
+        text: "Kitchen",
+        icon: <KitchenIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "studentarea",
+        text: "Student Area",
+        icon: <WeekendIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "elevator",
+        text: "Elevator",
+        icon: <ElevatorIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "gym",
+        text: "Gym",
+        icon: <RunCircleIcon fontSize="large" />,
+        active: false,
+    },
+    {
+        data: "mail",
+        text: "Mailing Facilities",
+        icon: <EmailIcon fontSize="large" />,
+        active: false,
+    }
+]
 
 
 
@@ -24,8 +100,9 @@ const AddDorm = () => {
     const [classYear, setClassYear] = useState('first-year')
     const [calenderYear, setCalenderYear] = useState(2021)
     const [roomType, setRoomType] = useState('single')
-    const [recommend, setRecommend] = useState('yes')
+    const [recommend, setRecommend] = useState(true)
     const [comment, setComment] = useState('')
+    const [isValid, setIsValid] = useState(false)
 
     const addAmenity = (incoming) => {
         let dataItem = incoming
@@ -50,7 +127,7 @@ const AddDorm = () => {
             .map(el => el.data)
             .join("@#")
 
-        const dateCreated = moment().format("DD/MM/YYYY")
+        const dateCreated = moment().format("YYYY-MM-DD")
         const { slugUni } = router.query
 
         const resAndReview = {
@@ -69,8 +146,34 @@ const AddDorm = () => {
             slugUni
         }
 
-        console.log(resAndReview)
+        // console.log(resAndReview)
+
+        fetch(`${server}/api/universities/${slugUni}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(resAndReview)
+        }).then(res => {
+            console.log(res.status)
+            res.json()
+        })
+        .then(data => console.log(data))
+
     }
+
+    useEffect(() => {
+        if (
+            resName &&
+            amenitiesList.filter(el => el.active).length > 0 &&
+            comment.length >= 5
+        ) setIsValid(true)
+        else setIsValid(false)
+    }, [
+        resName,
+        amenitiesList,
+        comment
+    ])
 
     return (
         <>
@@ -258,8 +361,8 @@ const AddDorm = () => {
                                 value={recommend}
                                 onChange={(e) => setRecommend(e.target.value)}
                             >
-                                <MenuItem value={"yes"}>Yes</MenuItem>
-                                <MenuItem value={"no"}>No</MenuItem>
+                                <MenuItem value={true}>Yes</MenuItem>
+                                <MenuItem value={false}>No</MenuItem>
                             </Select>
                         </div>
                     </div>
@@ -346,7 +449,11 @@ const AddDorm = () => {
                         <div className="form-text" style={{marginBottom: "2rem"}}>
                             <h5 style={{fontWeight: 500}}>On submitting your form will be sent for reviewing</h5>
                         </div>
-                        <button className="btn-main" type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
+                        {
+                            isValid ? 
+                            <button className="btn-main" type="submit" onClick={(e) => handleSubmit(e)}>Submit</button> :
+                            <button className="btn-disabled" onClick={(e) => e.preventDefault()}>Provide Correct Information</button>
+                        }
                     </div>
                 </form>
             </div>

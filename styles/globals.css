@@ -126,6 +126,15 @@ form {
   background-color: #00fc00;
 }
 
+.btn-disabled {
+  padding: 1rem 1.5rem;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: rgb(43, 43, 43);
+  color: var(--white);
+  cursor: not-allowed;
+}
+
 .btn-back {
   background-color: transparent;
   display: flex;
@@ -195,7 +204,12 @@ form {
   width: 100%;
   max-width: 800px;
   text-align: center;
-  /* transform: translateY(-50%); */
+}
+
+@media screen and (max-width: 960px) {
+  .hero-content-inner {
+    transform: translateY(-25%);
+  }
 }
 
 .hero-content-search-div {

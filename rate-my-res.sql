@@ -48,3 +48,35 @@ INSERT INTO universities(uni_id, uni_name, uni_slug) VALUES
 
 INSERT INTO universities(uni_id, uni_name, uni_slug) VALUES
 ('cput','Cape Peninsula University Of Technology','cape-peninsula-university-of-technology');
+
+CREATE TABLE residences (
+    res_slug varchar(150) PRIMARY KEY,
+    res_name varchar(150) not null,
+    uni_slug varchar(150) not null,
+    is_reviewed boolean not null,
+    date_created date not null DEFAULT CURRENT_DATE,
+    CONSTRAINT fk_universities
+        FOREIGN KEY(uni_slug) 
+        REFERENCES universities(uni_slug)
+);
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    res_slug varchar(150) not null,
+    room_rating smallint not null,
+    building_rating smallint not null,
+    bathroom_rating smallint not null,
+    location_rating smallint not null,
+    class_year varchar(20) not null,
+    calender_year int not null,
+    room_type varchar(20) not null,
+    recommend boolean not null,
+    amenities text not null,
+    comment varchar(300) not null,
+    is_reviewed boolean not null,
+    date_created date not null DEFAULT CURRENT_DATE,
+    CONSTRAINT fk_res
+        FOREIGN KEY(res_slug) 
+        REFERENCES residences(res_slug)
+        ON DELETE CASCADE
+);
