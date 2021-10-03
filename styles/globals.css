@@ -4,11 +4,13 @@
 :root {
   /* Colors */
   --white: hsl(0, 0%, 100%);
+  /* --white: hsl(0, 0%, 98%); */
   --green: hsl(101, 100%, 50%);
   --blue: hsl(207, 43%, 9%);
   --gray-green: hsl(138, 8%, 53%);
   --background-grey: hsl(0, 0%, 90%);
   --background-grey-accent: hsl(0, 0%, 98%);
+  --red: hsl(0, 100%, 50%);
 }
 
 *, *::before, *::after {
@@ -119,6 +121,10 @@ form {
   font-size: 2rem;
 }
 
+.logo {
+  cursor: pointer;
+}
+
 .btn-main {
   color: var(--white);
   background-color: var(--green);
@@ -158,6 +164,7 @@ form {
 
 .rating-container {
   display: flex;
+  align-items: center;
   margin: 0.75rem 0;
 }
 .rating-container p {
@@ -338,7 +345,7 @@ form {
 }
 
 .spacing {
-  margin: 1.5rem 0;
+  margin-bottom: 2rem;
 }
 
 .uni-content > .residences {
@@ -483,8 +490,8 @@ form {
 .res-banner > .content {
   grid-area: content;
   padding: 5rem 2rem;
-  color: var(--white);
-  background-color: var(--blue);
+  color: var(--blue);
+  background-color: var(--background-grey-accent);
 }
 /* .res-banner > .content > h1, */
 .res-banner > .content > button {
@@ -499,7 +506,7 @@ form {
 
 
 .res-content {
-  height: 1000px;
+  /* height: 1000px; */
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -509,7 +516,7 @@ form {
 
 .res-specs {
   grid-area: specs;
-  margin: 2rem;
+  padding: 2rem;
 }
 
 .rating-spec {
@@ -533,6 +540,60 @@ form {
 }
 .amenity-spec span {
   margin-left: 0.75rem;
+}
+
+.class-spec {
+  margin: 0.5rem 0;
+}
+
+.percentage-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+.percentage-div > span.percentage {
+  margin-left: 0.5rem;
+}
+
+.MuiLinearProgress-root {
+  height: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-grow: 1;
+}
+.MuiLinearProgress-bar {
+  border-radius: 5px;
+}
+
+.reviews {
+  grid-area: reviews;
+  padding: 2rem;
+}
+
+.reviews-container {
+  width: 100%;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  /* padding: 1rem; */
+  box-shadow: 0 1px 0px 0 rgb(0 0 0 / 15%);
+}
+.review > p {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.recommends-div {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.recommends-div > p {
+  margin-left: 0.5rem;
 }
 
 
@@ -569,5 +630,22 @@ form {
   /* University Page */
   .uni-content {
     grid-template-columns: 1fr;
+  }
+
+  /* Residence Page */
+  .res-banner {
+    grid-template-columns: 1fr;
+    grid-template-rows: 50vh auto;
+    grid-template-areas: 'image' 'content';
+  }
+
+  .res-banner > .content {
+    padding: 2rem;
+  }
+
+  .res-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: 'specs' 'reviews';
   }
 }
