@@ -450,8 +450,8 @@ form {
   align-items: center;
   /* border: 3px solid var(--blue); */
   border-radius: 50px;
-  box-shadow:  5px 5px 10px #919191,
-              -5px -5px 10px #ffffff;
+  box-shadow:  2px 2px 4px #919191,
+              -2px -2px 4px #ffffff;
   z-index: 4;
   cursor: pointer;
 }

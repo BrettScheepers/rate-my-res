@@ -142,7 +142,7 @@ const University = ({ university }) => {
                         <h3><span className="text">3 Residences</span> match your filters</h3>
 
                         <div className="residence-card-container">
-                            <div className="residence-card">
+                            <div className="residence-card" onClick={() => router.push(`/universities/${slugUni}/residence/`)}>
                                 <Image
                                     src="/assets/ReviewAvatar.svg"
                                     alt="house-svg"
@@ -178,7 +178,7 @@ const University = ({ university }) => {
                                     <p>2 reviews</p>
                                 </div>
                             </div>
-                            <div className="residence-card">
+                            <div className="residence-card" onClick={() => router.push(`/universities/${slugUni}/residence/`)}>
                                 <Image
                                     src="/assets/ReviewAvatar.svg"
                                     alt="house-svg"
