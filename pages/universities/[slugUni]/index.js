@@ -44,7 +44,7 @@ export const getStaticProps = async (context) => {
             date_created: dateCreated
         }
     })
-    console.log(dataResidences)
+    // console.log(dataResidences)
 
     return {
         props: { university: dataUni, residences: dataResidences }

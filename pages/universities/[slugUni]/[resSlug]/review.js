@@ -92,9 +92,7 @@ import {amenitiesDefaultArr} from '../../../../imports/imports'
 const Review = () => {
     const router = useRouter()
     const { slugUni, resSlug } = router.query
-    const resName = resSlug
-        .split('-')
-        .map((el) => {
+    const resName = resSlug.split('-').map((el) => {
         return el.charAt(0).toUpperCase() + el.substring(1)
         })
         .join(' ')
