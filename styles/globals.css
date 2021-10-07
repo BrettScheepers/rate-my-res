@@ -351,12 +351,9 @@ form {
 .uni-content > .residences {
   margin-bottom: 2rem;
 }
-.uni-content > .residences h3 {
-  margin-top: 1rem;
-}
 
 .residence-card-container {
-  margin: 3rem 0;
+  margin: 2rem 0;
   display: flex;
   flex-direction: column;
 }
@@ -554,6 +551,7 @@ form {
 }
 .percentage-div > span.percentage {
   margin-left: 0.5rem;
+  min-width: 41px;
 }
 
 .MuiLinearProgress-root {

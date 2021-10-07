@@ -297,8 +297,8 @@ const AddDorm = () => {
                             >
                                 <MenuItem value={"first-year"}>First Year</MenuItem>
                                 <MenuItem value={"second-year"}>Second Year</MenuItem>
-                                <MenuItem value={"grad"}>Third Year/Grad</MenuItem>
-                                <MenuItem value={"post-grad"}>Post Grad</MenuItem>
+                                <MenuItem value={"third-year"}>Third Year</MenuItem>
+                                <MenuItem value={"post-graduate"}>Post Graduate</MenuItem>
                             </Select>
                         </div>
                     </div>

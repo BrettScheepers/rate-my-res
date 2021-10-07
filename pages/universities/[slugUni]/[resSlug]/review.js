@@ -90,6 +90,13 @@ import {amenitiesDefaultArr} from '../../../../imports/imports'
 
 const Review = () => {
     const router = useRouter()
+    const { slugUni, resSlug } = router.query
+    const resName = resSlug
+        .split('-')
+        .map((el) => {
+        return el.charAt(0).toUpperCase() + el.substring(1)
+        })
+        .join(' ')
     let [amenitiesList, setAmenitiesList] = useState([...amenitiesDefaultArr])
     // let amenitiesList = amenitiesDefaultArr
     const [roomRating, setRoomRating] = useState(3)
@@ -129,7 +136,7 @@ const Review = () => {
         const dateCreated = moment().format("YYYY-MM-DD")
         const { slugUni } = router.query
 
-        const resAndReview = {
+        const review = {
             roomRating,
             buildingRating,
             bathroomRating,
@@ -141,17 +148,17 @@ const Review = () => {
             amenities,
             comment,
             dateCreated,
-            slugUni
+            resSlug,
         }
 
         // console.log(resAndReview)
 
-        fetch(`${server}/api/universities/${slugUni}`, {
+        fetch(`${server}/api/universities/${slugUni}/${resSlug}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(resAndReview)
+            body: JSON.stringify(review)
         }).then(res => {
             console.log(res.status)
             res.json()
@@ -179,7 +186,7 @@ const Review = () => {
                 <BackButton />
                 <form>
                     {/* Res Name */}
-                    <h2>Review <span className="text">Smuts Hall</span></h2>
+                    <h2>Review <span className="text">{resName}</span></h2>
                     {/* <div className="form-box res-name-form-box">
                         <h4 style={{marginBottom: "1rem"}}>Provide Your Res Name</h4>
                         <TextField fullWidth variant="outlined" color="secondary" placeholder="Enter Res Name"
@@ -294,8 +301,8 @@ const Review = () => {
                             >
                                 <MenuItem value={"first-year"}>First Year</MenuItem>
                                 <MenuItem value={"second-year"}>Second Year</MenuItem>
-                                <MenuItem value={"grad"}>Third Year/Grad</MenuItem>
-                                <MenuItem value={"post-grad"}>Post Grad</MenuItem>
+                                <MenuItem value={"third-year"}>Third Year</MenuItem>
+                                <MenuItem value={"post-graduate"}>Post Graduate</MenuItem>
                             </Select>
                         </div>
                     </div>

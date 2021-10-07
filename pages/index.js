@@ -135,7 +135,7 @@ export default function Home({ universities }) {
                 }}>
                   <div className="uni-card-img">
                     <Image
-                      src={`/assets/uni-images/${id}.jpg`}
+                      src={`/assets/uni-images/${slug}.jpg`}
                       alt={name}
                       layout="fill"
                       objectFit="cover"
