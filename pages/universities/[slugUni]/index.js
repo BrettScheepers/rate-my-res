@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Header from '../../../components/Header'
+import BackButton from '../../../components/BackButton'
 import Image from 'next/image'
 import moment from 'moment'
 import {amenitiesDefaultArr} from '../../../imports/imports'
@@ -72,6 +73,7 @@ const University = ({ university, residences }) => {
                 </div>
                 <div className="uni-content">
                     <div className="filter">
+                        <BackButton />
                         <h2>{name}</h2>
                         <div className="spacing">
                             <p>{totalNumReviews} student reviews</p>
@@ -117,7 +119,8 @@ const University = ({ university, residences }) => {
                                                 control={
                                                     <Checkbox 
                                                         value={data}
-                                                        color="primary" 
+                                                        color="primary"
+                                                        disabled 
                                                         onChange={
                                                         (e) => console.log(e.target.checked, e.target.value)
                                                     } />

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import {server} from '../../../../config/index'
 import Header from '../../../../components/Header'
 import BackButton from '../../../../components/BackButton'
+import ReviewModal from '../../../../components/ReviewModal'
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
 import MenuItem from '@mui/material/MenuItem';
@@ -109,6 +110,7 @@ const Review = () => {
     const [recommend, setRecommend] = useState(true)
     const [comment, setComment] = useState('')
     const [isValid, setIsValid] = useState(false)
+    const [reviewCompleted, setReviewCompleted] = useState(false)
 
     const addAmenity = (incoming) => {
         let dataItem = incoming
@@ -164,6 +166,12 @@ const Review = () => {
             res.json()
         })
         .then(data => console.log('Completed'))
+        .catch(error => console.log(error))
+
+        setReviewCompleted(true)
+        setTimeout(() => {
+            router.push('/')
+        },3000)
 
     }
 
@@ -181,6 +189,7 @@ const Review = () => {
 
     return (
         <>
+            {reviewCompleted && <ReviewModal />}
             <Header />
             <div className="add-dorm-page">
                 <BackButton />

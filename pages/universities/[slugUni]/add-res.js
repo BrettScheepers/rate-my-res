@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import {server} from '../../../config/index'
 import Header from '../../../components/Header'
 import BackButton from '../../../components/BackButton'
+import ReviewModal from '../../../components/ReviewModal'
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
 import MenuItem from '@mui/material/MenuItem';
@@ -23,70 +24,6 @@ import {amenitiesDefaultArr} from '../../../imports/imports'
 // import RunCircleIcon from '@mui/icons-material/RunCircle'; //Gym
 // import EmailIcon from '@mui/icons-material/Email'; //Mailroom
 
-// export const amenitiesDefaultArr = [
-//     {
-//         data: "bathroom",
-//         text: "Private Bathroom",
-//         icon: <WcIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "dining",
-//         text: "Dining Hall",
-//         icon: <FastfoodIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "wifi",
-//         text: "Wifi",
-//         icon: <WifiIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "laundry",
-//         text: "Laundry",
-//         icon: <LocalLaundryServiceIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "airconditioning",
-//         text: "Air Conditioning",
-//         icon: <AcUnitIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "kitchen",
-//         text: "Kitchen",
-//         icon: <KitchenIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "studentarea",
-//         text: "Student Area",
-//         icon: <WeekendIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "elevator",
-//         text: "Elevator",
-//         icon: <ElevatorIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "gym",
-//         text: "Gym",
-//         icon: <RunCircleIcon fontSize="large" />,
-//         active: false,
-//     },
-//     {
-//         data: "mail",
-//         text: "Mailing Facilities",
-//         icon: <EmailIcon fontSize="large" />,
-//         active: false,
-//     }
-// ]
-
-
 
 const AddDorm = () => {
     const router = useRouter()
@@ -103,6 +40,7 @@ const AddDorm = () => {
     const [recommend, setRecommend] = useState(true)
     const [comment, setComment] = useState('')
     const [isValid, setIsValid] = useState(false)
+    const [reviewCompleted, setReviewCompleted] = useState(false)
 
     const addAmenity = (incoming) => {
         let dataItem = incoming
@@ -155,11 +93,15 @@ const AddDorm = () => {
             },
             body: JSON.stringify(resAndReview)
         }).then(res => {
-            console.log(res.status)
             res.json()
         })
         .then(data => console.log('Completed'))
+        .catch(error => console.log(error))
 
+        setReviewCompleted(true)
+        setTimeout(() => {
+            router.push('/')
+        },3000)
     }
 
     useEffect(() => {
@@ -177,6 +119,7 @@ const AddDorm = () => {
 
     return (
         <>
+            {reviewCompleted && <ReviewModal />}
             <Header />
             <div className="add-dorm-page">
                 <BackButton />
