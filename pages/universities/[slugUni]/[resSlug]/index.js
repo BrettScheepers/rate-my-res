@@ -2,6 +2,7 @@
 import {useState} from 'react'
 import {server} from '../../../../config/index'
 import Image from 'next/image'
+import Link from 'next/link'
 import Header from '../../../../components/Header'
 import BackButton from '../../../../components/BackButton'
 import Rating from '@mui/material/Rating';
@@ -30,6 +31,7 @@ export async function getServerSideProps(context) {
 const Residence = ({ data }) => {
     const router = useRouter()
     const { slugUni, resSlug } = router.query
+    // console.log(resSlug)
 
     // Api Data Processing
     const { res_name: resName } = data.residence
@@ -57,7 +59,7 @@ const Residence = ({ data }) => {
     const reviewAmenities = reviews.map(el => {
         return el.amenities.split('@#')
     })
-    console.log(reviewAmenities)
+    // console.log(reviewAmenities)
     const amenitySpec = amenitiesDefaultArr.filter((el) => {
         let amenityCounter = 0
 
@@ -83,7 +85,10 @@ const Residence = ({ data }) => {
                         {/* Res Overall Rating */}
                         <h1>{residenceTotal}</h1>
                         <Rating name="read-only" size="large" value={residenceTotal} precision={0.25} readOnly />
-                        <button className="btn-main" onClick={() => router.push(`/universities/${slugUni}/${resSlug}/review`)}>Write A Review</button>
+                        <Link href={`/universities/${slugUni}/${resSlug}/review`} passHref>
+                            {/* <button className="btn-main" onClick={() => router.push(`/universities/${slugUni}/${resSlug}/review`)}>Write A Review</button> */}
+                            <button className="btn-main">Write A Review</button>
+                        </Link>
                         {/* <Button variant="contained" >Write a Review</Button> */}
                     </div>
                     <div className="image">
