@@ -65,8 +65,8 @@ const University = ({ university, residences }) => {
             <div className="university-page">
                 <div className="banner">
                     <Image
-                        src={`/assets/uni-images/${id}.jpg`}
-                        alt={`id`}
+                        src={`/assets/uni-images/${slug}.jpg`}
+                        alt={`${slug}`}
                         layout="fill"
                         objectFit="cover"
                     />
