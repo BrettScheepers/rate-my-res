@@ -1,7 +1,7 @@
 CREATE TABLE universities (
-    uni_id varchar(10) PRIMARY KEY,
+    uni_id varchar(10),
     uni_name varchar(150) not null,
-    uni_slug varchar(150) not null
+    uni_slug varchar(150) not null PRIMARY KEY
 );
 
 INSERT INTO universities(uni_id, uni_name, uni_slug) VALUES

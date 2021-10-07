@@ -35,7 +35,7 @@ export const getStaticProps = async (context) => {
     const resUni = await pool.query('SELECT * FROM universities WHERE uni_slug = $1', [slugUni])
     const dataUni = await resUni.rows[0]
     const resResidences = await pool.query(
-        'SELECT r.res_slug, r.res_name, r.date_created, r.uni_slug, count(r2.*) as review_count, avg(r2.room_rating)::numeric(10,1) as room_avg, avg(r2.building_rating)::numeric(10,1) as building_avg,avg(r2.bathroom_rating)::numeric(10,1) as bathroom_avg,avg(r2.location_rating)::numeric(10,1) as location_avg FROM residences r inner join reviews r2 on r.res_slug = r2.res_slug WHERE uni_slug = $1 group by r.res_slug ', [slugUni])
+        'SELECT r.res_slug, r.res_name, r.date_created, r.uni_slug, count(r2.*) as review_count, avg(r2.room_rating)::numeric(10,1) as room_avg, avg(r2.building_rating)::numeric(10,1) as building_avg,avg(r2.bathroom_rating)::numeric(10,1) as bathroom_avg,avg(r2.location_rating)::numeric(10,1) as location_avg FROM residences r inner join reviews r2 on r.res_slug = r2.res_slug WHERE uni_slug = $1 AND r.is_reviewed = true group by r.res_slug ', [slugUni])
     let dataResidences = await resResidences.rows
     dataResidences = dataResidences.map(el => {
         const dateCreated = moment(el.date_created).format('DD/MM/YYYY')
@@ -47,7 +47,8 @@ export const getStaticProps = async (context) => {
     // console.log(dataResidences)
 
     return {
-        props: { university: dataUni, residences: dataResidences }
+        props: { university: dataUni, residences: dataResidences },
+        revalidate: 60
     }
 }
 

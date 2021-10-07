@@ -26,18 +26,19 @@ export default async function handler(req, res) {
         try {
             await client.query('BEGIN')
             const residenceResponse = await client.query(
-                'select * from residences where res_slug = $1',
+                'select * from residences where res_slug = $1 and is_reviewed = true',
                 [resSlug]
             )
             const residence = residenceResponse.rows[0]
 
             const reviewsResponse = await client.query(
-                'select * from reviews where res_slug = $1',
+                'select * from reviews where res_slug = $1 and is_reviewed = true',
                 [resSlug]
             )
             const reviews = reviewsResponse.rows
 
             await client.query('COMMIT')
+            console.log({residence, reviews})
             res.status(200).json({ residence, reviews })
         } catch (e) {
             await client.query('ROLLBACK')
