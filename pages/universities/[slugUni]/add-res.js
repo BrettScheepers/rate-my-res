@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import {server} from '../../../config/index'
 import Header from '../../../components/Header'
 import BackButton from '../../../components/BackButton'
+import Meta from '../../../components/Meta'
 import ReviewModal from '../../../components/ReviewModal'
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
@@ -120,6 +121,7 @@ const AddDorm = () => {
     return (
         <>
             {reviewCompleted && <ReviewModal />}
+            <Meta title='Rate My Res | Add A Residence' />
             <Header />
             <div className="add-dorm-page">
                 <BackButton />

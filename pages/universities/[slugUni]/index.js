@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Header from '../../../components/Header'
 import BackButton from '../../../components/BackButton'
+import Meta from '../../../components/Meta'
 import Image from 'next/image'
 import moment from 'moment'
 import {amenitiesDefaultArr} from '../../../imports/imports'
@@ -88,6 +89,7 @@ const University = ({ university, residences }) => {
 
     return (
         <>
+            <Meta title={`Rate My Res | ${name}`} description={`Residence information for ${name}`} />
             <Header />
             <div className="university-page">
                 <div className="banner">

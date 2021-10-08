@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '../../../../components/Header'
 import BackButton from '../../../../components/BackButton'
+import Meta from '../../../../components/Meta'
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -72,6 +73,7 @@ const Residence = ({ data }) => {
 
     return (
         <>  
+            <Meta title={`Rate My Res | ${resName}`} description={`Residence information for ${resName}`} />
             <Header />
             <div className="residence-page">
                 <div className="name">

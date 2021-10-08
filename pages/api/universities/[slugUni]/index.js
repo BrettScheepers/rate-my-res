@@ -5,8 +5,8 @@ export default async function handler(req, res) {
     const { roomRating, buildingRating, bathroomRating, locationRating, classYear, calenderYear, roomType, recommend, amenities, comment, dateCreated, slugUni } = req.body
     const isReviewed = false
     let {resName} = req.body
-    console.log(req.body)
-    console.log(resName)
+    // console.log(req.body)
+    // console.log(resName)
     
     const resSlug = resName
       .toLowerCase()
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       })
       .join(' ')
 
-    console.log(resSlug, resName)
+    // console.log(resSlug, resName)
 
     const client = await pool.connect()
 

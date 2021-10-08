@@ -11,7 +11,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
+import Meta from '../components/Meta'
 import Layout from '../components/Layout'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline';
@@ -31,10 +31,7 @@ export default function MyApp(props) {
 
   return (
     <React.Fragment>
-      <Head>
-        <title>My page</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-      </Head>
+      <Meta />
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />

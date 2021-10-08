@@ -38,7 +38,7 @@ export default async function handler(req, res) {
             const reviews = reviewsResponse.rows
 
             await client.query('COMMIT')
-            console.log({residence, reviews})
+            // console.log({residence, reviews})
             res.status(200).json({ residence, reviews })
         } catch (e) {
             await client.query('ROLLBACK')
