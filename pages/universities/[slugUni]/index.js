@@ -1,5 +1,5 @@
 import { pool } from '../../../database/db'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Header from '../../../components/Header'
@@ -53,12 +53,38 @@ export const getStaticProps = async (context) => {
 }
 
 const University = ({ university, residences }) => {
-    const { uni_id: id, uni_name: name, uni_slug: slug} = university
-    const totalNumReviews = residences.reduce((acc, cur) => acc + parseInt(cur.review_count), 0) || 0
-    const [isChecked, setIsChecked] = useState(true)
     const router = useRouter()
     const { slugUni } = router.query
+    const { uni_id: id, uni_name: name, uni_slug: slug} = university
+    const totalNumReviews = residences.reduce((acc, cur) => acc + parseInt(cur.review_count), 0) || 0
+    const [generalSort, setGeneralSort] = useState('name')
+    const [dataResidences, setDataResidences] = useState(
+        residences
+            .map((el) => {
+                const { room_avg, building_avg, bathroom_avg, location_avg } = el
+                const totalAvg = parseFloat(((parseFloat(room_avg) + parseFloat(building_avg) + parseFloat(bathroom_avg) + parseFloat(location_avg))/4).toFixed(1));
+
+                return {
+                    ...el,
+                    totalAvg
+                }
+            })
+            .sort((a,b) => a.res_name.localeCompare(b.res_name))
+    )
+    
     const [amenities, setAmenities] = useState([...amenitiesDefaultArr])
+
+    useEffect(() => {
+        if (generalSort === 'name') {
+            setDataResidences(dataResidences.sort((a,b) => a.res_name.localeCompare(b.res_name)))
+        }
+        if (generalSort === 'highest-rated') {
+            setDataResidences(dataResidences.sort((a,b) => a.totalAvg - b.totalAvg))
+        }
+        if (generalSort === 'most-reviews') {
+            setDataResidences(dataResidences.sort((a,b) => a.review_count - b.review_count))
+        }
+    }, [generalSort, dataResidences])
 
     return (
         <>
@@ -85,6 +111,11 @@ const University = ({ university, residences }) => {
                                 aria-label="sort"
                                 defaultValue="name"
                                 name="sort"
+                                value={generalSort}
+                                onChange={(e) => {
+                                    setGeneralSort(e.target.value)
+                                    // handleGeneralSort(e)
+                                }}
                             >
                                 <FormControlLabel value="name" control={<Radio color="primary" />} label="Name" />
                                 <FormControlLabel value="highest-rated" control={<Radio color="primary" />} label="Highest Rated" />
@@ -134,7 +165,7 @@ const University = ({ university, residences }) => {
                         </div>
                     </div>
                     <div className="residences">
-                        <h3><span className="text">{totalNumReviews} Residences</span> match your filters</h3>
+                        <h3><span className="text">{dataResidences.length} Residences</span> match your filters</h3>
 
                         <div className="residence-card-container">
                             {/* <div className="residence-card" onClick={() => router.push(`/universities/${slugUni}/residence/`)}>
@@ -154,69 +185,13 @@ const University = ({ university, residences }) => {
                                     </div>
                                     <p>2 reviews</p>
                                 </div>
-                            </div>
-                            <div className="residence-card">
-                                <Image
-                                    src="/assets/ReviewAvatar.svg"
-                                    alt="house-svg"
-                                    width={75}
-                                    height={75}
-                                    className="residence-card-img"
-                                />
-
-                                <div className="residence-card-content">
-                                    <h4>Long Name</h4>
-                                    <div className="rating-container">
-                                        <Rating name="read-only" value={4.3} precision={0.25} readOnly />
-                                        <p>4.3</p>
-                                    </div>
-                                    <p>2 reviews</p>
-                                </div>
-                            </div>
-                            <div className="residence-card" onClick={() => router.push(`/universities/${slugUni}/residence/`)}>
-                                <Image
-                                    src="/assets/ReviewAvatar.svg"
-                                    alt="house-svg"
-                                    width={75}
-                                    height={75}
-                                    className="residence-card-img"
-                                />
-
-                                <div className="residence-card-content">
-                                    <h4>Random Very Long Name</h4>
-                                    <div className="rating-container">
-                                        <Rating name="read-only" value={4.3} precision={0.25} readOnly />
-                                        <p>4.3</p>
-                                    </div>
-                                    <p>2 reviews</p>
-                                </div>
-                            </div>
-                            <div className="residence-card">
-                                <Image
-                                    src="/assets/ReviewAvatar.svg"
-                                    alt="house-svg"
-                                    width={75}
-                                    height={75}
-                                    className="residence-card-img"
-                                />
-
-                                <div className="residence-card-content">
-                                    <h4>South Point</h4>
-                                    <div className="rating-container">
-                                        <Rating name="read-only" value={4.3} precision={0.25} readOnly />
-                                        <p>4.3</p>
-                                    </div>
-                                    <p>2 reviews</p>
-                                </div>
                             </div> */}
 
                             {
-                                residences.length > 0 && residences.map((el, index) => {
-                                    const {res_slug: resSlug, res_name: resName, uni_slug: uniSlug, date_created: dateCreated, room_avg: roomAvg, building_avg: buildingAvg, bathroom_avg: bathroomAvg, location_avg: locationAvg} = el;
+                                dataResidences.length > 0 && dataResidences.map((el, index) => {
+                                    const {res_slug: resSlug, res_name: resName, uni_slug: uniSlug, date_created: dateCreated, room_avg: roomAvg, building_avg: buildingAvg, bathroom_avg: bathroomAvg, location_avg: locationAvg, totalAvg} = el;
                                     const reviewCount = parseInt(el.review_count)
-                                    const totalAvg = parseFloat(((parseFloat(roomAvg) + parseFloat(buildingAvg) + parseFloat(bathroomAvg) + parseFloat(locationAvg))/4).toFixed(1));
-
-                                    // parseFloat((parseFloat(roomAvg) + parseFloat(buildingAvg) + parseFloat(bathroomAvg) + parseFloat(locationAvg))/4).toFixed(1))
+                                    // const totalAvg = parseFloat(((parseFloat(roomAvg) + parseFloat(buildingAvg) + parseFloat(bathroomAvg) + parseFloat(locationAvg))/4).toFixed(1));
 
                                     return (
                                         <div className="residence-card" key={index} onClick={() => router.push(`/universities/${slugUni}/${resSlug}/`)}>
