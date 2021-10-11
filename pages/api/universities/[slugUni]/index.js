@@ -1,29 +1,6 @@
 import { pool } from '../../../../database/db'
-import NextCors from 'nextjs-cors';
-
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-// function runMiddleware(req, res, fn) {
-//   return new Promise((resolve, reject) => {
-//     fn(req, res, (result) => {
-//       if (result instanceof Error) {
-//         return reject(result)
-//       }
-
-//       return resolve(result)
-//     })
-//   })
-// }
 
 export default async function handler(req, res) {
-  // Run the middleware
-  await NextCors(req, res, {
-    // Options
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    origin: '*',
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  });
-
   if (req.method === "POST") {
     const { roomRating, buildingRating, bathroomRating, locationRating, classYear, calenderYear, roomType, recommend, amenities, comment, dateCreated, slugUni } = req.body
     const isReviewed = false
