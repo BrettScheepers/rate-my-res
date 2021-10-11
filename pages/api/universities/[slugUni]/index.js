@@ -4,7 +4,8 @@ import Cors from 'cors'
 // Cors Middleware
 const cors = Cors({
   methods: ['GET', 'POST'],
-  origin: ['https://www.ratemyres.co.za/', 'http://localhost:3000']
+  // origin: ['https://www.ratemyres.co.za/', 'http://localhost:3000']
+  origin: '*'
 })
 
 // Helper method to wait for a middleware to execute before continuing
