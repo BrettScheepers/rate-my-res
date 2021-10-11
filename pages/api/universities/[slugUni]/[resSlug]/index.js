@@ -7,8 +7,6 @@ export default async function handler(req, res) {
         const isReviewed = false
 
         try {
-
-
             pool.query('INSERT INTO reviews(res_slug, room_rating, building_rating, bathroom_rating, location_rating, class_year, calender_year, room_type, recommend, amenities, comment, is_reviewed, date_created) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
             [resSlug, roomRating, buildingRating, bathroomRating, locationRating, classYear, calenderYear, roomType, recommend, amenities, comment, isReviewed, dateCreated], (error, result) => {
               res.status(200).json({ msg: 'Successful' });
