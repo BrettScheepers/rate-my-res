@@ -91,7 +91,7 @@ const Review = ({data}) => {
 
         // console.log(resAndReview)
 
-        fetch(`${server}/api/universities/${slugUni}/${resSlug}`, {
+        fetch(`${server}/api/universities/${slugUni}/${resSlug}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

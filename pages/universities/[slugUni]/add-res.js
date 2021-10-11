@@ -87,7 +87,7 @@ const AddDorm = () => {
 
         // console.log(resAndReview)
 
-        fetch(`${server}/api/universities/${slugUni}`, {
+        fetch(`${server}/api/universities/${slugUni}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
