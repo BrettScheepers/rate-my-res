@@ -402,7 +402,7 @@ const Review = ({data}) => {
                         {
                             isValid ? 
                             <button className="btn-main" type="submit" onClick={(e) => handleSubmit(e)}>Submit</button> :
-                            <button className="btn-disabled" onClick={(e) => e.preventDefault()}>Provide Correct Information</button>
+                            <button className="btn-disabled" onClick={(e) => e.preventDefault()}>Answer all Questions</button>
                         }
                     </div>
                 </form>
